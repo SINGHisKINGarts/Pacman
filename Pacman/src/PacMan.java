@@ -1,9 +1,11 @@
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
+import javax.swing.Timer;
 import java.util.*;
 
-public class PacMan extends JPanel{
+
+public class PacMan extends JPanel implements ActionListener,KeyListener{
     private int rowCount=21;
     private int columnCount=19;
     private int tileSize=32;
@@ -50,16 +52,22 @@ public class PacMan extends JPanel{
     HashSet<Block> foods;
     HashSet<Block> ghosts;
     Block pacman;
+
+    Timer gameLoop;
+
     PacMan() {
         setPreferredSize(new Dimension(boardWidth,boardHeight));
         setBackground(Color.BLACK);
+        addKeyListener(this);
+        setFocusable(true);
+        // this above statement so that the Jpanel listens to the keylistener
 
         // load images
         wallImage=new ImageIcon(getClass().getResource("./wall.png")).getImage();
         blueGhostImage=new ImageIcon(getClass().getResource("./blueGhost.png")).getImage();
-        redGhostImage=new ImageIcon(getClass().getResource("./blueGhost.png")).getImage();
-        pinkGhostImage=new ImageIcon(getClass().getResource("./blueGhost.png")).getImage();
-        orangeGhostImage=new ImageIcon(getClass().getResource("./blueGhost.png")).getImage();
+        redGhostImage=new ImageIcon(getClass().getResource("./redGhost.png")).getImage();
+        pinkGhostImage=new ImageIcon(getClass().getResource("./pinkGhost.png")).getImage();
+        orangeGhostImage=new ImageIcon(getClass().getResource("./orangeGhost.png")).getImage();
 
         pacmanUpImage=new ImageIcon(getClass().getResource("./pacmanUp.png")).getImage();
         pacmanLeftImage=new ImageIcon(getClass().getResource("./pacmanLeft.png")).getImage();
@@ -67,9 +75,9 @@ public class PacMan extends JPanel{
         pacmanRightImage=new ImageIcon(getClass().getResource("./pacmanRight.png")).getImage();
 
         loadMap();
-        System.out.println(walls.size());
-        System.out.println(foods.size());
-        System.out.println(ghosts.size());
+        gameLoop= new Timer(50,this);
+        gameLoop.start();
+
 
     }
 
@@ -119,5 +127,44 @@ public class PacMan extends JPanel{
 
             }
         }
+    }
+    public void paintComponent(Graphics g){
+        super.paintComponent(g);
+        draw(g);
+    }
+    public void draw(Graphics g){
+        g.drawImage(pacman.image,pacman.x, pacman.y,pacman.width,pacman.height,null);
+
+        for(Block ghost:ghosts){
+            g.drawImage(ghost.image,ghost.x,ghost.y,ghost.width,ghost.height,null);
+        }
+        g.setColor(Color.WHITE);
+        for(Block food:foods){
+            g.fillRect(food.x,food.y,food.width,food.height);
+        }
+        for(Block wall:walls){
+            g.drawImage(wall.image,wall.x,wall.y,wall.width,wall.height,null);
+        }
+
+
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        repaint();
+    }
+
+    //when in constructor PacMan the keylistener is called with "this"
+    // it goes to these functions of the key listener for performing actions
+
+    @Override
+    public void keyTyped(KeyEvent e) {}
+
+    @Override
+    public void keyPressed(KeyEvent e) {}
+
+    @Override
+    public void keyReleased(KeyEvent e) {
+        System.out.println("KeyEvent: "+ e.getKeyCode());
     }
 }
