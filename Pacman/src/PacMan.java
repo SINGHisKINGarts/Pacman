@@ -4,7 +4,6 @@ import javax.swing.*;
 import javax.swing.Timer;
 import java.util.*;
 
-
 public class PacMan extends JPanel implements ActionListener,KeyListener{
 
     class Block {
@@ -38,7 +37,7 @@ public class PacMan extends JPanel implements ActionListener,KeyListener{
             this.x+=this.velocityX;
             this.y+=this.velocityY;
             for(Block wall:walls){
-                if(collision(pacman,wall)){
+                if(collision(this,wall)){
                     this.x-=this.velocityX;
                     this.y-=this.velocityY;
                     this.direction=prevDirection;
@@ -217,12 +216,13 @@ public class PacMan extends JPanel implements ActionListener,KeyListener{
         for(Block ghost:ghosts){
             g.drawImage(ghost.image,ghost.x,ghost.y,ghost.width,ghost.height,null);
         }
+
+        for(Block wall:walls){
+            g.drawImage(wall.image,wall.x,wall.y,wall.width,wall.height,null);
+        }
         g.setColor(Color.WHITE);
         for(Block food:foods){
             g.fillRect(food.x,food.y,food.width,food.height);
-        }
-        for(Block wall:walls){
-            g.drawImage(wall.image,wall.x,wall.y,wall.width,wall.height,null);
         }
 
         // score
@@ -337,8 +337,8 @@ public class PacMan extends JPanel implements ActionListener,KeyListener{
             gameLoop.start();
         }
 
-
-        System.out.println("KeyEvent: "+ e.getKeyCode());
+//
+//        System.out.println("KeyEvent: "+ e.getKeyCode());
         if(e.getKeyCode()==KeyEvent.VK_UP){
             pacman.updateDirection('U');
         }
