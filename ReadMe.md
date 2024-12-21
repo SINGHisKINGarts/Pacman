@@ -1,5 +1,6 @@
 Used java swing
-<head>Steps to run pacman-</head>
+<head>Steps to run pacman-</head><img src="Pacman/src/pinkGhost.png"><img src="Pacman/src/blueGhost.png"><img src="Pacman/src/redGhost.png">
+<img src="Pacman/src/orangeGhost.png">
 <br>
 1. Download the zip file and extract it.
 <br>
@@ -17,5 +18,5 @@ Used java swing
 
 <br>
 <br>
-<br><img src="Pacman/src/pacmanLeft.png">
+<br><img src="Pacman/src/pacmanRight.png">
 Thank You
