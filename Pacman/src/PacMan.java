@@ -88,6 +88,8 @@ public class PacMan extends JPanel implements ActionListener,KeyListener{
     private Image pacmanLeftImage;
     private Image pacmanRightImage;
 
+    private Image cherryImage;
+
     //X- wall, O-skip, P-pacman
     // ' ' - food,
     // Ghosts- b-blue,p-pink,o-orange,r-red
@@ -103,7 +105,7 @@ public class PacMan extends JPanel implements ActionListener,KeyListener{
             "XXXX X XXrXX X XXXX",
             "O       bpo       O",
             "XXXX X XXXXX X XXXX",
-            "OOOX X       X XOOO",
+            "OOOX X   C   X XOOO",
             "XXXX X XXXXX X XXXX",
             "X        X        X",
             "X XX XXX X XXX XX X",
@@ -118,6 +120,7 @@ public class PacMan extends JPanel implements ActionListener,KeyListener{
     HashSet<Block> foods;
     HashSet<Block> ghosts;
     Block pacman;
+    Block cherry;
 
     Timer gameLoop;
 
@@ -147,6 +150,7 @@ public class PacMan extends JPanel implements ActionListener,KeyListener{
         pacmanLeftImage=new ImageIcon(getClass().getResource("./pacmanLeft.png")).getImage();
         pacmanDownImage=new ImageIcon(getClass().getResource("./pacmanDown.png")).getImage();
         pacmanRightImage=new ImageIcon(getClass().getResource("./pacmanRight.png")).getImage();
+        cherryImage=new ImageIcon(getClass().getResource("./cherry.png")).getImage();
 
         loadMap();
         for(Block ghost:ghosts){
@@ -194,6 +198,10 @@ public class PacMan extends JPanel implements ActionListener,KeyListener{
                 }
                 else if(tileMapChar== 'P'){
                     pacman=new Block(pacmanRightImage,x,y,tileSize,tileSize);
+                }
+                else if(tileMapChar== 'C'){
+                    cherry=new Block(cherryImage,x,y,tileSize,tileSize);
+
                 }
                 else if(tileMapChar== ' '){
                     Block food=new Block(null,x+14,y+14,4,4);
