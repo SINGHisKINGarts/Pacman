@@ -2,7 +2,7 @@ Used java swing
 <head>Steps to run pacman-</head><img src="Pacman/src/pinkGhost.png"><img src="Pacman/src/blueGhost.png"><img src="Pacman/src/redGhost.png">
 <img src="Pacman/src/orangeGhost.png">
 <br>
-1. Download the zip file and extract it.
+1. Download the zip file and extract it. 
 <br>
 2. Run App.java.
 <br>
